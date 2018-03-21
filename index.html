@@ -65,26 +65,63 @@
                 <input class="section__input-text--location" id="from" name="from" type="text">
               </div>
               <div class="section__row  row">
-                <label class="section__label" for="dest">Куда</label>
-                <input class="section__input-text--location" id="dest" name="dest" type="text">
+                <label class="section__label" for="to">Куда</label>
+                <input class="section__input-text--location" id="to" name="dest" type="text">
               </div>
             </section>
             
-            <button id="btnSubmit" class="form__btn  btn  btn-outline-secondary" type="submit">Посчитать >></button>
-          </div>
-          
+            <button class="form__btn  btn  btn-outline-secondary" id="btnSubmit" data-toggle="modal" data-target="#exampleModalCenter" type="button">Посчитать >></button>
+          </div>          
         </form>
       </div>
     </div>
   </div>
+  
+  
 
-
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLongTitle">Расчёт доставки</h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <section class="modal-body">
+          <div class="container-fluid">
+            <div class="row">
+              <p class="col-md-4">
+                Параметры посылки<br>
+                <span>Размер: </span><span data-length="0">100</span>x<span data-width="0">20</span>x<span data-height="0">30</span>см<br>
+                <span>Вес: </span><span data-weight="0">100</span>г<br>
+                Доставка: <span data-fast="false">обычная/срочная</span>
+              </p>
+              <p class="col-md-4">
+                Забрать: <span data-date="0">18.03.2018</span><br>
+                Из: <span data-from=" ">Москва</span><br>
+                В: <span data-to=" ">Санкт-Петербург</span><br>
+                <b>Расстояние: 800км</b><br>
+              </p>
+            </div>
+            <b>Стоимость: 1200руб</b>
+          </div>
+        </section>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Ясно</button>
+          <button type="button" class="btn btn-primary">Понятно</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   
   <script src="dist/js/script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   
-  <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6aa551b0042007700e93c1e37ce3388a44cbff9993fd82be1aa2a5f850662c2b&amp;width=730&amp;height=610&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>
+<!--  <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6aa551b0042007700e93c1e37ce3388a44cbff9993fd82be1aa2a5f850662c2b&amp;width=730&amp;height=610&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>-->
 
 
 

@@ -1,15 +1,16 @@
 @import '~jquery-ui/themes/base/all.css';
 
 
+
 body {
-  padding-top: 50px;
+  padding-top: 25px;
 }
 
 
 
-
 .form {
-  background-color: #ddd;
+  background-color: #ffffff;
+  border: 2px solid #ddd
 }
 
 .form__wrapper {
@@ -23,7 +24,7 @@ body {
 }
 
 .form__section {
-  margin-bottom: 50px; 
+  margin-bottom: 35px; 
 }
 
 .form__btn {
@@ -34,7 +35,7 @@ body {
 
 
 .section__row {
-  margin-bottom: 10px;
+  
 }
 
 .section__label {
@@ -61,11 +62,55 @@ body {
 
 
 
-.modal-dialog {
-  max-width: 1000px;  
+.modal-window {
+  position: relative;
+  background: #ffffff;
+  padding: 20px;
+  width: auto;
+  width: 1000px;
+  margin: 20px auto;
 }
 
-.modal-body {
-  padding: 0;
+.modal-title {
+  margin-bottom: 30px;
+  font-weight: 700;
 }
 
+.modal-row {
+  margin-bottom: 30px;
+}
+
+.modal-subtitle {
+  margin-bottom: 20px;
+}
+
+.modal-parameters {  
+  
+  .modal-label {
+    display: inline-block;
+    min-width: 100px;
+  }
+  
+}
+
+.modal-delivery {
+  
+  .modal-label {
+    display: inline-block;
+    min-width: 30px;
+  }
+  
+  .modal-distance {
+    padding-top: 8px;
+    font-weight: 700;
+  }
+  
+}
+
+.modal-summary {
+  margin-left: auto;
+  padding-top: 30px;
+  
+  font-size: 1.5rem;
+  text-decoration: underline;
+}

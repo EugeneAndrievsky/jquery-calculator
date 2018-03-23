@@ -4,127 +4,123 @@
 <head>
   <title>Calculator</title>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <!--   <link id="favicon" type="image/x-icon" rel="shortcut icon" href="favicon.ico"> -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <!--  <link rel="stylesheet" href="css/style.min.css">-->
+  <link rel="stylesheet" href="dist/css/magnific-popup.css">
   <link rel="stylesheet" href="dist/css/style.css">
 
 </head>
 
 <body>
 
-  <div class="container">   
+  <div class="container">
     <div class="row">
-     
+
       <div class="col-md-8">
         <section id="map"></section>
       </div>
-      
+
       <div class="col-md-4">
         <form class="form" action="https://echo.htmlacademy.ru" method="post">
           <div class="form__wrapper">
             <h2 class="form__title">Fire-Express</h2>
-            
+
             <section class="form__section  section  container">
-              <h5 class="section__title">Параметры посылки</h5>            
-              <div class="section__row  row">
-                <label class="section__label" for="length">Длина</label>
-                <input class="section__input-text" id="length" name="length" type="text">см
-              </div>            
-              <div class="section__row  row">
-                <label class="section__label" for="width">Ширина</label>
-                <input class="section__input-text" id="width" name="width" type="text">см
-              </div>            
-              <div class="section__row  row">
-                <label class="section__label" for="height">Высота</label>
-                <input class="section__input-text" id="height" name="height" type="text">см
+              <h5 class="section__title">Параметры посылки</h5>
+              <div class="section__row  row    form-group">
+                <label class="section__label  col-form-label" for="length">Длина</label>
+                <input class="section__input-text  form-control" id="length" name="length" type="text"><label for="" class="col-form-label">см</label>
               </div>
-              <div class="section__row  row">
-                <label class="section__label" for="weight">Вес</label>
-                <input class="section__input-text" id="weight" name="weight" type="text">г
+              <div class="section__row  row  form-group">
+                <label class="section__label  col-form-label" for="width">Ширина</label>
+                <input class="section__input-text  form-control" id="width" name="width" type="text">
+                <label class="col-form-label">см</label>
+              </div>
+              <div class="section__row  row  form-group">
+                <label class="section__label  col-form-label" for="height">Высота</label>
+                <input class="section__input-text  form-control" id="height" name="height" type="text">
+                <label class="col-form-label">см</label>
+              </div>
+              <div class="section__row  row  form-group">
+                <label class="section__label  col-form-label" for="weight">Вес</label>
+                <input class="section__input-text  form-control" id="weight" name="weight" type="text">
+                <label class="col-form-label">г</label>
               </div>
             </section>
-            
+
             <section class="form__section  section  container">
-              <div class="section__row  row">
-                <label class="section__label--date" for="date">Дата отправки</label>
-                <input class="section__input-text--date" id="date" name="date" type="text">
-                <span>[--]</span>
+              <div class="section__row  row  form-group">
+                <label class="section__label--date  col-form-label" for="date">Дата отправки</label>
+                <input class="section__input-text--date  form-control" id="date" name="date" type="text">
               </div>
-              <div class="section__row  row  form-check">              
-                <input class="form-check-input" id="fast" name="fast" type="checkbox">
-                <label class="form-check-label" for="fast">Срочная доставка</label>
-              </div>              
-            </section>
-            
-            <section class="form__section  section  container">
-              <div class="section__row  row">
-                <label class="section__label" for="from">Откуда</label>
-                <input class="section__input-text--location" id="from" name="from" type="text">
-              </div>
-              <div class="section__row  row">
-                <label class="section__label" for="to">Куда</label>
-                <input class="section__input-text--location" id="to" name="dest" type="text">
+              <div class="custom-control custom-checkbox">
+                <input class="custom-control-input" id="fast" name="fast" type="checkbox">
+                <label class="custom-control-label" for="fast">Срочная доставка</label>
               </div>
             </section>
-            
-            <button class="form__btn  btn  btn-outline-secondary" id="btnSubmit" data-toggle="modal" data-target="#exampleModalCenter" type="button">Посчитать >></button>
-          </div>          
+
+            <section class="form__section  section  container">
+              <div class="section__row  row    form-group">
+                <label class="section__label  col-form-label" for="from">Откуда</label>
+                <input class="section__input-text--location  form-control" id="from" name="from" type="text">
+              </div>
+              <div class="section__row  row  form-group">
+                <label class="section__label  col-form-label" for="to">Куда</label>
+                <input class="section__input-text--location  form-control" id="to" name="to" type="text">
+              </div>
+            </section>
+
+            <button class="form__btn  btn  btn-outline-secondary  show-modal" id="btnSubmit" type="sumbit" disabled>Посчитать >></button>
+          </div>
         </form>
       </div>
     </div>
   </div>
-  
-  
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLongTitle">Расчёт доставки</h2>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <section class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <p class="col-md-4">
-                Параметры посылки<br>
-                <span>Размер: </span><span data-length="0">100</span>x<span data-width="0">20</span>x<span data-height="0">30</span>см<br>
-                <span>Вес: </span><span data-weight="0">100</span>г<br>
-                Доставка: <span data-fast="false">обычная/срочная</span>
-              </p>
-              <p class="col-md-4">
-                Забрать: <span data-date="0">18.03.2018</span><br>
-                Из: <span data-from=" ">Москва</span><br>
-                В: <span data-to=" ">Санкт-Петербург</span><br>
-                <b>Расстояние: 800км</b><br>
-              </p>
-            </div>
-            <b>Стоимость: 1200руб</b>
+  <!-- Modal Window-->
+  <div class="modal-window  mfp-hide" id="modal-window">
+    <h2 class="modal-title">Расчёт доставки</h2>
+    <div class="container-fluid">
+      <h5 class="modal-subtitle">Параметры посылки</h5>
+      <div class="modal-row  row">
+
+        <div class="modal-parameters  col-md-4">
+          <div>
+            <span class="modal-label">Размер: </span><!--
+         --><span class="input-length"></span>x<!--
+         --><span class="input-width"></span>x<!--
+         --><span class="input-height"></span>см
           </div>
-        </section>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Ясно</button>
-          <button type="button" class="btn btn-primary">Понятно</button>
+          <div><span class="modal-label">Вес: </span><span class="input-weight"></span>г</div>
+          <div><span class="modal-label">Доставка: </span><span class="input-fast"></span></div>
         </div>
+
+        <div class="modal-delivery  col-md-8">
+          <div class="modal-date"></div>
+          <div><span class="modal-label">Из: </span><span class="input-from"></span></div>
+          <div><span class="modal-label">В: </span><span class="input-to">Санкт-Петербург</span></div>
+          <div class="modal-distance">Расстояние: 800км</div>
+        </div>
+
+        <b class="modal-summary  col-md-8">Стоимость: 1200руб</b>
+
       </div>
+
     </div>
   </div>
-  
-  
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script src="dist/js/jquery.magnific-popup.min.js"></script>
   <script src="dist/js/script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  
-<!--  <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6aa551b0042007700e93c1e37ce3388a44cbff9993fd82be1aa2a5f850662c2b&amp;width=730&amp;height=610&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>-->
 
-
-
+  <!--  <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6aa551b0042007700e93c1e37ce3388a44cbff9993fd82be1aa2a5f850662c2b&amp;width=730&amp;height=610&amp;lang=ru_RU&amp;scroll=true&amp;id=map"></script>-->
   
 </body>
 

@@ -1530,41 +1530,52 @@ a.ui-button:active,
 body {
   padding-top: 25px;
 }
+
 .form {
   background-color: #ffffff;
   border: 2px solid #ddd;
 }
+
 .form__wrapper {
   padding: 15px;
 }
+
 .form__title {
   margin-bottom: 20px;
   text-align: center;
 }
+
 .form__section {
   margin-bottom: 35px;
 }
+
 .form__btn {
   display: block;
   margin-left: 170px;
 }
+
 .section__label {
   width: 80px;
   margin-right: 10px;
 }
+
 .section__label--date {
   width: 120px;
 }
+
 .section__input-text {
   width: 120px;
   margin-right: 10px;
 }
+
 .section__input-text--date {
   width: 150px;
 }
+
 .section__input-text--location {
   width: 150px;
 }
+
 .modal-window {
   position: relative;
   background: #ffffff;
@@ -1573,28 +1584,35 @@ body {
   width: 1000px;
   margin: 20px auto;
 }
+
 .modal-title {
   margin-bottom: 30px;
   font-weight: 700;
 }
+
 .modal-row {
   margin-bottom: 30px;
 }
+
 .modal-subtitle {
   margin-bottom: 20px;
 }
+
 .modal-parameters .modal-label {
   display: inline-block;
   min-width: 100px;
 }
+
 .modal-delivery .modal-label {
   display: inline-block;
   min-width: 30px;
 }
+
 .modal-delivery .modal-distance {
   padding-top: 8px;
   font-weight: 700;
 }
+
 .modal-summary {
   margin-left: auto;
   padding-top: 30px;

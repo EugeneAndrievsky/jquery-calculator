@@ -10474,93 +10474,148 @@ module.exports = __webpack_require__(6);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery_ui_ui_widgets_datepicker_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery_ui_ui_widgets_datepicker_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery_ui_ui_widgets_datepicker_js__);
-
-window.$ = window.jQuery = __WEBPACK_IMPORTED_MODULE_0_jquery___default.a;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery_ui_ui_widgets_datepicker_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery_ui_ui_widgets_datepicker_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery_ui_ui_widgets_datepicker_js__);
+//import $ from "jquery";
+//window.$ = window.jQuery = $;
 
 
+//import 'magnific-popup/dist/jquery.magnific-popup.min.js';
 
 (function ($) {
-	"use strict";
+    "use strict";
 
-	$(function () {
+    $(function () {
 
-		//-----        
-		$.datepicker.regional['ru'] = {
-			closeText: 'Закрыть',
-			prevText: '&#x3c;Пред',
-			nextText: 'След&#x3e;',
-			currentText: 'Сегодня',
-			monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-			monthNamesShort: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-			dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
-			dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
-			dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-			weekHeader: 'Нед',
-			firstDay: 1,
-			isRTL: false,
-			showMonthAfterYear: false,
-			yearSuffix: ''
-		};
-		$.datepicker.setDefaults($.extend({ 'dateFormat': 'dd.mm.yy' }, $.datepicker.regional['ru']));
-		$('#date').datepicker();
+        //-----        
+        $.datepicker.regional['ru'] = {
+            closeText: 'Закрыть',
+            prevText: '&#x3c;Пред',
+            nextText: 'След&#x3e;',
+            currentText: 'Сегодня',
+            monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            monthNamesShort: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+            dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
+            dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+            weekHeader: 'Нед',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.extend({ 'dateFormat': 'dd.mm.yy' }, $.datepicker.regional['ru']));
+        $('#date').datepicker();
 
-		var deliveryCalculator = {
+        var deliveryCalculator = {
 
-			optionLength: 0,
-			optionWidth: 0,
-			optionHeight: 0,
-			optionWeight: 0,
-			optionDate: 0,
-			optionFast: false,
-			optionFrom: '',
-			optionTo: '',
+            init: function init() {
 
-			init: function init() {
-				var self = this;
-				$('#btnSubmit').on('click', function (e) {
-					//e.preventDefault;
-					self.getResults();
-					//return false;
-				});
-			},
+                var self = this;
 
-			getResults: function getResults() {
-				var self = this;
-				self.optionLength = parseInt($('#length').val()) || 0;
-				self.optionWidth = parseInt($('#width').val()) || 0;
-				self.optionHeight = parseInt($('#height').val()) || 0;
-				self.optionWeight = parseInt($('#weight').val()) || 0;
-				self.optionDate = $('#date').val() || 0;
-				self.optionFast = $('#fast').is(':checked');
-				self.optionFrom = $('#from').val() || '';
-				self.optionTo = $('#to').val() || '';
+                self.initMap();
 
-				var modal = $('.modal');
-				modal.find('span[data-length]').html(self.optionLength);
-				modal.find('span[data-width]').html(self.optionWidth);
-				modal.find('span[data-height]').html(self.optionHeight);
-				modal.find('span[data-weight]').html(self.optionWeight);
-				modal.find('span[data-date]').html(self.optionDate);
-				modal.find('span[data-from]').html(self.optionFrom);
-				modal.find('span[data-to]').html(self.optionTo);
-				if (self.optionFast) {
-					modal.find('span[data-fast]').html("срочная");
-				} else {
-					modal.find('span[data-fast]').html('обычная');
-				}
-			}
+                $('#btnSubmit').on('click', function (e) {
+                    e.preventDefault;
+                    self.getResults();
+                    return false;
+                }).removeAttr('disabled');
+            },
 
-		};
+            getResults: function getResults() {
 
-		deliveryCalculator.init();
+                var self = this;
+                var isError = false;
+                var errorMessage = 'Возникла ошибка';
 
-		///-----
+                self.clearModal();
 
-	});
+                self.optionLength = parseInt($('#length').val()) || 0;
+                self.optionWidth = parseInt($('#width').val()) || 0;
+                self.optionHeight = parseInt($('#height').val()) || 0;
+                self.optionWeight = parseInt($('#weight').val()) || 0;
+                self.optionDate = $('#date').val() || 0;
+                self.optionFast = $('#fast').is(':checked');
+                self.optionFrom = $('#from').val() || '';
+                self.optionTo = $('#to').val() || '';
+
+                if (self.optionLength < 1 || self.optionWidth < 1 || self.optionHeight < 1 || self.optionWeight < 1) {
+                    isError = true;
+                    errorMessage = 'Введите правильные параметры посылки';
+                }
+
+                if (self.optionFrom.length <= 1 || self.optionTo.length <= 1) {
+                    isError = true;
+                    errorMessage = 'Для получения рассчета введите точку отправления и точку получения';
+                }
+
+                if (isError) {
+                    alert(errorMessage);
+                    return false;
+                }
+
+                self.showModal();
+            },
+
+            openPopup: function openPopup() {
+
+                $.magnificPopup.open({
+                    items: {
+                        src: '#modal-window',
+                        type: 'inline'
+                    },
+                    closeBtnInside: true
+                });
+            },
+
+            showModal: function showModal() {
+
+                var self = this;
+                var modal = $('#modal-window');
+
+                modal.find('.input-length').html(self.optionLength);
+                modal.find('.input-width').html(self.optionWidth);
+                modal.find('.input-height').html(self.optionHeight);
+                modal.find('.input-weight').html(self.optionWeight);
+                modal.find('.input-from').html(self.optionFrom);
+                modal.find('.input-to').html(self.optionTo);
+
+                if (self.optionFast) {
+                    modal.find('.input-fast').html("срочная");
+                } else {
+                    modal.find('.input-fast').html('обычная');
+                }
+
+                if (self.optionDate) {
+                    modal.find('.modal-date').html('Забрать: <span>' + self.optionDate + 'г.</span><br>');
+                }
+
+                self.openPopup();
+            },
+
+            clearModal: function clearModal() {
+
+                var self = this;
+                self.optionLength = '';
+                self.optionWidth = '';
+                self.optionHeight = '';
+                self.optionWeight = '';
+                self.optionDate = '';
+                self.optionFast = '';
+                self.optionFrom = '';
+                self.optionTo = '';
+                $('#modal-window').find('.modal-date').html('');
+            },
+
+            initMap: function initMap() {}
+
+        };
+
+        deliveryCalculator.init();
+
+        ///-----
+
+    });
 })(jQuery);
 
 /***/ }),

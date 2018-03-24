@@ -10,7 +10,8 @@ body {
 
 .form {
   background-color: #ffffff;
-  border: 2px solid #ddd
+  border: 2px solid #ddd;
+  border-radius: 5px;
 }
 
 .form__wrapper {
@@ -113,4 +114,12 @@ body {
   
   font-size: 1.5rem;
   text-decoration: underline;
+}
+
+//sweetalert
+
+.swal-text {
+  font-size: 20px;
+  line-height: 1.33;
+  text-align: center;
 }

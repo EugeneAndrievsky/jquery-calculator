@@ -1,6 +1,9 @@
 //import $ from "jquery";
 //window.$ = window.jQuery = $;
 
+import swal from 'sweetalert'; 
+window.swal = swal;
+
 import 'jquery-ui/ui/widgets/datepicker.js';
 //import 'magnific-popup/dist/jquery.magnific-popup.min.js';
 
@@ -81,7 +84,12 @@ import 'jquery-ui/ui/widgets/datepicker.js';
 			}			
 			
 			if(isError){
-				alert(errorMessage);
+                swal({
+                  title: '',
+                  text: errorMessage,
+                  icon: 'warning',
+                  button: 'Ой!',
+                });
 				return false;
 			}            
             

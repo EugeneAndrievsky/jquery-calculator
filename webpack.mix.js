@@ -12,16 +12,20 @@ let mix = require('laravel-mix');
  */
 
 mix.js('src/js/script.js', 'dist/js/')
-   .sass('src/sass/style.scss', 'dist/css/')
-   .options({
+    .sass('src/sass/style.scss', 'dist/css/')
+    .options({
       processCssUrls: false,
       autoprefixer: {
         options: {
           browsers: ['last 2 versions']
         }
       }
-   })
-   .setPublicPath('dist');
+    })    
+    .setPublicPath('dist');
+
+if (mix.config.inProduction) {
+    mix.disableNotifications();
+}
 
 // Full API
 // mix.js(src, output);

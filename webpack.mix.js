@@ -22,6 +22,7 @@ mix.js('src/js/script.js', 'dist/js/')
       }
     })    
     .setPublicPath('dist');
+mix.copy('src/img/*', 'dist/img/');
 
 if (mix.config.inProduction) {
     mix.disableNotifications();

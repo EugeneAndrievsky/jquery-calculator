@@ -42,19 +42,18 @@ import 'magnific-popup/dist/jquery.magnific-popup.min.js';
         
     var deliveryCalculator = {
         
-        init: function(){
-            
+        init: function(){            
 			var self = this;
             
-//            self.initMap();
-            
-			$('#btnSubmit')
-                .on('click', function(e){
-                    e.preventDefault;
-                    self.getResults();
-                    return false;
-			    })                
-                .removeAttr('disabled');
+            self.Map.init();
+
+            $('#btnSubmit')
+            .on('click', function(e){
+                e.preventDefault;
+                self.getResults();
+                return false;
+            })                
+            .removeAttr('disabled');
         },
 		
 		getResults: function(){
@@ -71,35 +70,34 @@ import 'magnific-popup/dist/jquery.magnific-popup.min.js';
             self.optionWeight = parseInt($('#weight').val()) || 0;
             self.optionDate = $('#date').val() || 0;
             self.optionFast = $('#fast').is(':checked');
-            self.optionFrom = $('#from').val() || '';
-            self.optionTo = $('#to').val() || '';
+            self.optionFrom = $('#placeFrom').val() || '';
+            self.optionTo = $('#placeTo').val() || '';
             
-//            if(self.optionLength < 1 || self.optionWidth < 1 || self.optionHeight < 1 || self.optionWeight < 1) {
-//                isError = true;
-//                errorMessage = 'Введите правильные параметры посылки';
-//            }
-//            
-//            if(self.optionFrom.length <= 1  || self.optionTo.length <= 1){
-//				isError = true;
-//				errorMessage = 'Для получения рассчета введите точку отправления и точку получения';
-//			}			
-//			
-//			if(isError){
-//                swal({
-//                  title: '',
-//                  text: errorMessage,
-//                  icon: 'warning',
-//                  button: 'Ой!',
-//                });
-//				return false;
-//			}            
+            if(self.optionLength < 1 || self.optionWidth < 1 || self.optionHeight < 1 || self.optionWeight < 1) {
+                isError = true;
+                errorMessage = 'Введите правильные параметры посылки';
+            }
             
+            if(self.optionFrom.length <= 1  || self.optionTo.length <= 1){
+				isError = true;
+				errorMessage = 'Для получения рассчета введите точку отправления и точку получения';
+			}			
+			
+			if(isError){
+                swal({
+                  title: '',
+                  text: errorMessage,
+                  icon: 'warning',
+                  button: 'Ой!',
+                });
+				return false;
+			}
+            
+            self.calcPrice();
 			self.showModal();
-            self.buildPath();
         },
         
-        openPopup: function() {
-            
+        openPopup: function() {            
             $.magnificPopup.open({
                 items: {
                   src: '#modal-window',
@@ -109,8 +107,7 @@ import 'magnific-popup/dist/jquery.magnific-popup.min.js';
             });
         },
         
-        showModal: function(){
-            
+        showModal: function(){            
             var self = this;
             var modal = $('#modal-window');
             
@@ -118,8 +115,12 @@ import 'magnific-popup/dist/jquery.magnific-popup.min.js';
             modal.find('.input-width').html(self.optionWidth);
             modal.find('.input-height').html(self.optionHeight);
             modal.find('.input-weight').html(self.optionWeight);
-            modal.find('.input-from').html(self.optionFrom);
-            modal.find('.input-to').html(self.optionTo);
+            modal.find('.input-from').html(
+                self.optionFrom.charAt(0).toUpperCase() + self.optionFrom.substr(1).toLowerCase()
+            );
+            modal.find('.input-to').html(
+                self.optionTo.charAt(0).toUpperCase() + self.optionTo.substr(1).toLowerCase()
+            );
             
             if(self.optionFast){
                 modal.find('.input-fast').html("срочная");
@@ -146,137 +147,116 @@ import 'magnific-popup/dist/jquery.magnific-popup.min.js';
             self.optionFrom = '';
             self.optionTo = '';
             $('#modal-window').find('.modal-date').html('');            
+        },  
+        
+        calcPrice: function() {
+            var routeLengthKm = parseInt(deliveryCalculator.Map.routeLength / 1000);
+            var weightKg = deliveryCalculator.optionWeight / 1000;
+            var fastCoeff =  function() {
+                if(deliveryCalculator.optionFast) {
+                    return 1.3;
+                } else {
+                    return 1;
+                }                
+            };
+            var routeCoeff = 5; // 5rub per 1kg*km 
+            
+            var routePrice = parseInt(routeLengthKm * weightKg * fastCoeff() * routeCoeff);
+            console.log('Total price is ' + routeLengthKm +  ' km * ' + weightKg + ' kg * ' + fastCoeff() +  ' * ' + routeCoeff + ' = ' + routePrice);
+            
+            $('.output-distance').text(routeLengthKm);
+            $('.output-price').text(routePrice);
         },
         
-        /*initMap: function(){
-            ymaps.ready(init);
-            var myMap;
-            var myPlacemark;
-            var myGeocoder;
+        Map: {
+            myMap: null,
+			placeFrom: '',
+			placeTo: '',
+            geoCenter: [0,0],
+			routeLength: 0,
             
-            function init() {
-                myMap = new ymaps.Map("map", {
-                    center: [55.76, 37.64],
-                    zoom: 7
-                });    
-
-                myGeocoder = ymaps.geocode("Москва");
-                myGeocoder.then(
-                    function (res) {
-                        var objectPos = res.geoObjects.get(0).geometry.getCoordinates();
-//                        alert('Координаты объекта: ' + objectPos);
-//                        console.log('Координаты объекта: ' + objectPos);
-//                        console.log(res.geoObjects.get(0).geometry.getCoordinates());
-
-                        myMap.setCenter(objectPos, 7);
-
-                        myPlacemark1 = new ymaps.Placemark(myMap.getCenter(), {
-                            hintContent: 'Москва!',
-                            balloonContent: 'Столица России'
-                        }, {
-                            iconLayout: 'default#image',                
-                            iconImageHref: 'dist/img/icon-map-1.svg',
-                            iconImageSize: [48, 48],
-                            iconImageOffset: [-24, -48]
-                        });
-                        myMap.geoObjects.add(myPlacemark1); 
-                    },
-                    function (err) {
-                        alert('Ошибка');
-                    }
-                );
-            };
-        },*/
-        
-        buildPath: function() {
-            ymaps.ready(init);
-            var myMap;
-            var markFrom;
-            var markTo;
-            var geoFrom;
-            var geoTo;
-            var geoCenter = [0,0];
-            var geoCenterPoint;
-            var self = this;
+            init: function() {
+                ymaps.ready(function(){
+                    deliveryCalculator.Map.myMap = new ymaps.Map("map", {
+                        center: [55.76, 37.64],
+                        zoom: 6
+                    });
+                });
+                
+                deliveryCalculator.Map.addEventListeners();
+            },
             
-            function init() {
-                myMap = new ymaps.Map("map", {
-                    center: [55.76, 37.64],
-                    zoom: 6
-                }); 
-
-                geoFrom = ymaps.geocode(self.optionFrom);
-                geoFrom.then(
-                    function (res) {
+            addEventListeners: function(){
+				$('#placeFrom').on('change',function(e){
+					deliveryCalculator.Map.placeFrom = $(this).val();
+					deliveryCalculator.Map.addMarker(deliveryCalculator.Map.placeFrom, 'Точка отправления', 'dist/img/icon-map-3.svg');
+					deliveryCalculator.Map.checkForPlaces();
+				});
+				$('#placeTo').on('change',function(e){
+					deliveryCalculator.Map.placeTo = $(this).val();
+					deliveryCalculator.Map.addMarker(deliveryCalculator.Map.placeTo, 'Точка назначения', 'dist/img/icon-map-1.svg');
+					deliveryCalculator.Map.checkForPlaces();
+				});
+			},
+            
+            addMarker: function(place, message, icon) {
+                var geo;
+                
+                geo = ymaps.geocode(place);                
+                geo.then(
+                    function (res) {                        
+						var mapMarker;
                         var objectPos = res.geoObjects.get(0).geometry.getCoordinates();
-                        geoCenter[0] += objectPos[0]/2;
-                        geoCenter[1] += objectPos[1]/2;
-                        
-                        console.log('Координаты первого объекта ' + self.optionFrom + ': ' + objectPos); 
-                        
-                        markFrom = new ymaps.Placemark(objectPos, {
-                            hintContent: self.optionFrom,
-                            balloonContent: 'Точка отправления'
+//                        geoCenter[0] += objectPos[0]/2;
+//                        geoCenter[1] += objectPos[1]/2;                        
+                        console.log('Координаты объекта ' + place + ': ' + objectPos);
+                        deliveryCalculator.Map.myMap.setCenter(objectPos, 7);
+
+                        mapMarker = new ymaps.Placemark(objectPos, {
+                            hintContent: place,
+                            balloonContent: message
                         }, {
                             iconLayout: 'default#image',                
-                            iconImageHref: 'dist/img/icon-map-3.svg',
-                            iconImageSize: [48, 48],
-                            iconImageOffset: [-24, -48]
+                            iconImageHref: icon,
+                            iconImageSize: [30, 48],
+                            iconImageOffset: [-10, -46]
                         });
-                        myMap.geoObjects.add(markFrom);
+                        deliveryCalculator.Map.myMap.geoObjects.add(mapMarker);
+//                        deliveryCalculator.Map.myMap.setCenter(geoCenter, 7); 
+//                        console.log('Координаты центра: ' + geoCenter);
                     },
                     function (err) {
                         alert('Ошибка');
                     }
                 );
+            },
+            
+            checkForPlaces: function() {
+                if(deliveryCalculator.Map.placeFrom && deliveryCalculator.Map.placeTo) {
+                    deliveryCalculator.Map.buildRoute();
+                }
+            },
+            
+            buildRoute: function() {
                 
-                geoTo = ymaps.geocode(self.optionTo);
-                geoTo.then(
-                    function (res) {
-                        var objectPos = res.geoObjects.get(0).geometry.getCoordinates();
-                        geoCenter[0] += objectPos[0]/2;
-                        geoCenter[1] += objectPos[1]/2;
-                        
-                        console.log('Координаты второго объекта ' + self.optionTo + ': ' + objectPos);
-
-                        markTo = new ymaps.Placemark(objectPos, {
-                            hintContent: self.optionTo,
-                            balloonContent: 'Точка назначения'
-                        }, {
-                            iconLayout: 'default#image',                
-                            iconImageHref: 'dist/img/icon-map-1.svg',
-                            iconImageSize: [48, 48],
-                            iconImageOffset: [-24, -48]
-                        });
-                        myMap.geoObjects.add(markTo);
-                        
-//                        myMap.setCenter(geoCenter, 7);                        
-                        console.log('Координаты центра: ' + geoCenter);
-                        myMap.setCenter(objectPos, 6);
-                    },
-                    function (err) {
-                        alert('Ошибка');
-                    }
-                );
-                
-                ymaps.route([self.optionFrom, self.optionTo]).then(
+                ymaps.route([deliveryCalculator.Map.placeFrom, deliveryCalculator.Map.placeTo]).then(
                     function (route) {
-                        myMap.geoObjects.add(route);                        
-                        var length = route.getLength();
-                        console.log(length);
-
+                        route.getPaths().options.set({
+                            strokeColor: '0000ffff',
+                            strokeWidth: 5,
+                            opacity: 0.7
+                        });
+                        deliveryCalculator.Map.myMap.geoObjects.add(route.getPaths());
+                        
+                        deliveryCalculator.Map.routeLength = route.getLength();
+                        console.log(deliveryCalculator.Map.routeLength);
                     },
                     function (error) {
                         alert('Возникла ошибка: ' + error.message);
                     }
                 );
-                
-                
-            };
-            
-            
+            }
         }
-		
 	};
 	
 	deliveryCalculator.init();

@@ -64,11 +64,11 @@
             <section class="form__section  section  container">
               <div class="section__row  row    form-group">
                 <label class="section__label  col-form-label" for="from">Откуда</label>
-                <input class="section__input-text--location  form-control" id="from" name="from" type="text">
+                <input class="section__input-text--location  form-control" id="placeFrom" name="from" type="text">
               </div>
               <div class="section__row  row  form-group">
                 <label class="section__label  col-form-label" for="to">Куда</label>
-                <input class="section__input-text--location  form-control" id="to" name="to" type="text">
+                <input class="section__input-text--location  form-control" id="placeTo" name="to" type="text">
               </div>
             </section>
 
@@ -101,10 +101,10 @@
           <div class="modal-date"></div>
           <div><span class="modal-label">Из: </span><span class="input-from"></span></div>
           <div><span class="modal-label">В: </span><span class="input-to">Санкт-Петербург</span></div>
-          <div class="modal-distance">Расстояние: 800км</div>
+          <div class="modal-distance">Расстояние: <span class="output-distance">800</span>км</div>
         </div>
 
-        <b class="modal-summary  col-md-8">Стоимость: 1200руб</b>
+          <b class="modal-summary  col-md-8">Стоимость: <span class="output-price">1200</span>руб</b>
 
       </div>
 

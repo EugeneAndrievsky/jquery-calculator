@@ -5791,7 +5791,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 }
 
 body {
-  padding-top: 25px;
+  padding-top: 12px;
 }
 
 .map {
@@ -5819,7 +5819,8 @@ body {
 
 .form__btn {
   display: block;
-  margin-left: 170px;
+  margin-left: auto;
+  margin-right: 15px;
 }
 
 .section__label {
@@ -5886,6 +5887,13 @@ body {
   padding-top: 30px;
   font-size: 1.5rem;
   text-decoration: underline;
+}
+
+.main-footer-copy {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .swal-text {

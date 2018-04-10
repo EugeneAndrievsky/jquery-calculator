@@ -5,7 +5,7 @@
 ![jQuery-Delivery-Calculator-Demo-1](https://user-images.githubusercontent.com/22684906/38329765-6c10fae6-3857-11e8-9e4a-ef73aaed0e2a.jpg)
 ![jQuery-Delivery-Calculator-Demo-2](https://user-images.githubusercontent.com/22684906/38329604-fd36335c-3856-11e8-9a21-aa77d37f6b93.jpg)
 
-### Features
+### Особенности
 - Получение данных из формы
 - Вычисление необходимых параметров
 - Вывод результатов в модальное окно

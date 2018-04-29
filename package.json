@@ -7,12 +7,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.1.0",
     "bootstrap-loader": "^2.2.0",
     "cross-env": "^5.1.4",
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1",
-    "laravel-mix": "^2.1.7",
+    "laravel-mix": "^2.1.11",
     "magnific-popup": "^1.1.0",
     "sweetalert": "^2.1.0"
   },
